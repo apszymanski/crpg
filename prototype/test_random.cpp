@@ -121,5 +121,4 @@ int  main() {
 
     test_all_rolls("dev", device_rng);
     test_all_rolls("default+time", default_rng);
-
 }

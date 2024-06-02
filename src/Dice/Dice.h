@@ -1,40 +1,15 @@
 #ifndef __DICE_H_INCLUDED__
 #define __DICE_H_INCLUDED__
 
-//  for the NULL Pointer
 #include <cstddef>
+// for random number generation
+#include <random>
 
-class Singleton {
-    private:
-        // static Ptr to the class instance
-        static Singleton* instancePtr;
-        // private default constructor
-        Singleton() {}
-
-    public:
-        // deleting copy constructor
-        Singleton(const Singleton& dice) = delete;
-
-        // static method 
-        static Singleton* getInstance() {
-            // if Singleton 
-            if (instancePtr == NULL) {
-                instancePtr = new Singleton();
-                return instancePtr;
-            }
-            else {
-                return instancePtr;
-            }
-        }
-};
-
-class Dice : Singleton
-{
+class Dice {
 private:
-    // member variables
+    std::random_device rng;
 public:
+    std::uint64_t roll(std::uint64_t n = 1, std::uint64_t d = 20);
 };
 
-
-
-#endif
+#endif /* __DICE_H_INCLUDED__ */
