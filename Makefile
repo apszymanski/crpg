@@ -1,5 +1,5 @@
 C++ = /usr/bin/g++
-CFLAGS := -std=c++20 -g -Wall -Wextra -Werror -Wpedantic
+CFLAGS := -std=c++20 -g -Wall -Werror -Weffc++ -Wextra -Wconversion -Wsign-conversion -Wpedantic
 PROJECT := $(realpath $(CURDIR))
 SOURCE :=  $(PROJECT)/src/
 BUILD := $(PROJECT)/build/
