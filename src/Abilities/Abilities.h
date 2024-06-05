@@ -1,3 +1,11 @@
+#ifndef __ABILITIES_H_INCLUDED__
+#define __ABILITIES_H_INCLUDED__
+
+
+
+#endif /* __ABILITIES_H_INCLUDED__ */
+
+/*
 #ifndef ABILITIES_H_
 #define ABILITIES_H_
 
@@ -52,3 +60,4 @@ class Abilities {
 };
 
 #endif
+*/

@@ -21,9 +21,15 @@ void check_distribution(Dice* die_ptr, std::uint_fast64_t n = 1000) {
         std::cout << std::to_string(i + 1) << ":\t" << std::string(count[i] / 10, '*') << '\t' << '\n';
     }
 }
+
 int main() {
     Dice die = Dice();
-    Dice* dice_ptr = & die;
+    
+    for (std::uint_fast64_t i {}; i < 5; i++) {
+        std::cout << die.roll() << std::endl;
+    }
+    
+    std::cout << die.roll() << std::endl;
+    Dice* dice_ptr = &die;
     check_distribution(dice_ptr, 10000);
-
 }
