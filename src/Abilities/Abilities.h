@@ -1,63 +1,53 @@
 #ifndef __ABILITIES_H_INCLUDED__
 #define __ABILITIES_H_INCLUDED__
 
-
-
-#endif /* __ABILITIES_H_INCLUDED__ */
-
-/*
-#ifndef ABILITIES_H_
-#define ABILITIES_H_
-
 #include <array>
-#include <string>
 #include <iostream>
 
-class Abilities {
-    private:
-    
-        static const std::uint8_t size = 6;
-        std::array<std::string, size> ability_names; 
-        mutable std::array<std::uint8_t, size> ability_scores;
+enum Ability : int {STR = 0, DEX, CON, INT, WIS, CHA};
 
-    public:
-    
-        // constructors
-        Abilities() {
-            ability_names = {"STR", "DEX", "CON", "INT", "WIS", "CHA"};
-        };
-        Abilities(std::array<std::uint8_t, size>);
-        Abilities(std::uint8_t);
-        
-        // deconstructor
-        ~Abilities();
+class Ability_Array {
 
-        // get and set methods
-        std::uint8_t get_ability(std::uint8_t score_index) {
-            if (score_index < size) return ability_scores[score_index]; else return -1;
-        }
+        private:
+            static const std::size_t size {6};                                       // size should be length of enum
+            std::array<int, std::size_t(size)> array{};
 
-        void set_ability(std::uint8_t score_index, std::uint8_t value) {
-            if (score_index < size) ability_scores[score_index] = value;
-        }
-
-        // get total of ability scores
-        std::uint8_t get_total() {
-            std::uint8_t sum;
-            for (std::uint8_t i = 0; i < size; i++) {
-                sum += ability_scores[i];
-            }
-            return sum;
-        }
-
-        // print ability scores
-        void print_ability_score(bool total_flag) {
-            for (std::uint8_t i = 0; i < size; i++) {
-                std::cout << ability_names[i] << ":\t" << ability_scores[i] << '\n'; 
-            }
-            std::cout << (total_flag ? std::to_string(get_total()) : "") << std::endl;
-        };
+        public:
+            Ability_Array();
+            Ability_Array(int scores[6]);
+            int get_score(Ability ability);
+            void set_score(Ability ability, int score);
+            void print_ability_array();
 };
 
-#endif
-*/
+class Abilities {
+
+    private:
+        /* Array containing ability score information.
+         * The first Ability_Array contains the raw scores,
+         * the second total abilities including any modifiers (race, ASI, equipment),
+         * and the third contains the ability score modifiers.
+         */
+        std::array<Ability_Array, std::size_t(3)> abilities{};
+
+    public:
+        Abilities();
+        Abilities(std::array<Ability_Array, std::size_t(3)> array);
+
+        int get_base_ability_score(Ability ability);
+        void set_base_ability_score(Ability ability, int score);
+        Ability_Array get_all_base_ability_scores();
+
+        int get_total_ability_score(Ability ability);
+        void set_total_ability_score(Ability ability, int score);
+        Ability_Array get_all_total_ability_scores();
+
+        int get_ability_modifier(Ability ability);
+        void set_ability_modifier(Ability ability, int modifier);
+        Ability_Array get_all_ability_modifiers();
+
+        void print_abilities();
+ 
+};
+
+#endif /* __ABILITIES_H_INCLUDED__ */
