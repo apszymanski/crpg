@@ -7,7 +7,7 @@ class Dice {
     private:
         std::random_device rng{};
     public:
-        std::uint_fast64_t roll(std::uint_fast64_t n = 1, std::uint_fast64_t d = 20);
+        int roll(int n = 1, int d = 20);
 };
 
 #endif /* __DICE_H_INCLUDED__ */

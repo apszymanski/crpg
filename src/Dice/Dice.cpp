@@ -1,21 +1,34 @@
 #include "Dice.h"
     
-std::uint_fast64_t Dice::roll(std::uint_fast64_t n, std::uint_fast64_t d) {
-    std::uniform_int_distribution<std::uint_fast64_t> distribution(1,d);
-    std::uint_fast64_t roll {0};
+int Dice::roll(int n, int d)
+{    
+    int roll{};
 
-    if (n == 1) {
-        roll = distribution(rng);
-    }
-    else {
-        std::uint_fast64_t total {0};
-        for (std::uint_fast64_t i {0}; i < n ; i++) {
-            std::uint_fast64_t current_roll = distribution(rng);
-            if (current_roll )
-            total += distribution(rng);
+    if (d == 2) {
+        std::uniform_int_distribution<int> distribution(0,1);
+
+        if (n == 1) {
+            roll = distribution(rng);
+
+        } else {
+            int total {};
+            for (int i {}; i < n; ++i) {
+                total += distribution(rng);
+            }
+            roll = total;
+        }
+    } else {
+        std::uniform_int_distribution<int> distribution(1,d);
+
+        if (n == 1) {
+            roll = distribution(rng);
+        } else {
+            int total {};
+            for (int i {}; i < n; ++i) {
+                total += distribution(rng);
+            }
             roll = total;
         }
     }
-    
     return roll;
 }

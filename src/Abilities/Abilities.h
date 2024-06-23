@@ -9,7 +9,7 @@ enum Ability : int {STR = 0, DEX, CON, INT, WIS, CHA};
 class Ability_Array {
 
         private:
-            static const std::size_t size {6};                                       // size should be length of enum
+            static const std::size_t size {6};                                  // size should be length of enum
             std::array<int, std::size_t(size)> array{};
 
         public:

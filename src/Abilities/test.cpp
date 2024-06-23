@@ -1,6 +1,6 @@
 #include "Abilities.h"
 
-void test_ability_array() {
+void test_Ability_Array() {
     Ability_Array a;
     a.print_ability_array();
     int b_base[]{1,2,3,4,5,6};
@@ -14,7 +14,10 @@ void test_ability_array() {
     }
 }
 
+void test_abilities() {
+
+}
 int main() {
-    test_ability_array();
+    test_Ability_Array();
     return 0;
 }
