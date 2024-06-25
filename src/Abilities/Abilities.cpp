@@ -2,7 +2,7 @@
 
 Ability_Array::Ability_Array()
 {
-    array = {0, 0, 0, 0, 0, 0};
+    array = {0, 0 ,0 ,0 ,0 ,0};
 }
 
 Ability_Array::Ability_Array(int scores[])
@@ -16,6 +16,11 @@ int Ability_Array::get_array_size()
     return int (size);
 }
 
+std::string Ability_Array::get_ability_identifier(Ability ability)
+{
+    return identifiers[ability];
+}
+
 int Ability_Array::get_score(Ability ability)
 {
     return array[ability];
@@ -26,10 +31,16 @@ void Ability_Array::set_score(Ability ability, int score)
     array[ability] = score;
 }
 
-void Ability_Array::print_ability_array(bool sign = false)
+void Ability_Array::print_identifiers()
 {
-    std::cout << '\t' << "STR" << '\t' << "DEX" << '\t' << "CON" << '\t'
-                      << "INT" << '\t' << "WIS" << '\t' << "CHA" << '\n';
+    for (std::size_t i {}; i < size; ++i){
+        std::cout << '\t' << get_ability_identifier(Ability (i));
+    }
+    std::cout << '\n';
+}
+
+void Ability_Array::print(bool sign = false)
+{
     std::cout << '\t';
     for (std::size_t i = 0; i < size; i++) {
         if (sign) {
@@ -69,7 +80,7 @@ std::string Ability_Change::get_source()
 }
 
 Abilities::Abilities()
-{
+{ 
     base = Ability_Array();
     total = Ability_Array();
     modifiers = Ability_Array();
@@ -84,9 +95,9 @@ Abilities::Abilities(int array[6])
 
 Abilities::Abilities(std::array<Ability_Array, std::size_t(3)> array)
 {
-    base = array[0];
-    total = array[1];
-    modifiers = array[2];
+    base = array.at(0);
+    total = array.at(1);
+    modifiers = array.at(2);
 }
 
 int Abilities::get_base_score(Ability ability)
@@ -178,16 +189,20 @@ void Abilities::update_all_modifiers()
 void Abilities::update_abilities(Ability_Change change)
 {
     history.push_back(change);
-    set_total_score(change.get_ability(), (get_total_score(change.get_ability()) + change.get_change()));
+    Ability changed_ability = change.get_ability();
+    int current_score = get_total_score(changed_ability);
+    int score_modification = change.get_change();
+    int new_score = current_score + score_modification;
+    set_total_score(changed_ability, new_score);
     update_all_modifiers();
 }
 
-void Abilities::print_abilities()
-{
-    std::cout << "Base ability scores:" << '\n';
-    base.print_ability_array();
-    std::cout << "Total ability scores:" << '\n';
-    total.print_ability_array();
-    std::cout << "Ability modifiers:" << '\n';
-    modifiers.print_ability_array(true);
+void Abilities::print()
+{   base.print_identifiers();
+    std::cout << "Base:" << '\n';
+    base.print();
+    std::cout << "Total:" << '\n';
+    total.print();
+    std::cout << "Modifiers:" << '\n';
+    modifiers.print(true);
 }

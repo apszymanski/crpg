@@ -1,7 +1,7 @@
 #include "Dice.h"
-    
+
 int Dice::roll(int n, int d)
-{    
+{
     int roll{};
 
     if (d == 2) {

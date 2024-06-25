@@ -1,10 +1,9 @@
 #include "Dice.h"
 
-#include <iomanip>
-#include <iostream>
-#include <map>
-#include <random>
+#include <array>
 #include <string>
+#include <iostream>
+#include <random>
 
 void get_random_numbers(Dice *ptr, int n = 10)
 {
@@ -26,11 +25,10 @@ void check_distribution(Dice *ptr, int n = 10000)
     }
 }
 
-
-int main() {
+int main()
+{
     Dice die = Dice();
     Dice *dice_ptr = &die;
     get_random_numbers(dice_ptr);
     check_distribution(dice_ptr);
-
 }
