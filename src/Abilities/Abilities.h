@@ -16,11 +16,11 @@ class Ability_Array {
 
     public:
         Ability_Array();
-        Ability_Array(int scores[size]);
-        int get_array_size();
-        int get_score(Ability ability);
-        void set_score(Ability ability, int score);
-        void print_ability_array();
+        Ability_Array(int[size]);
+        static int get_array_size();
+        int get_score(Ability);
+        void set_score(Ability,int);
+        void print_ability_array(bool);
 };
 
 class Ability_Change {
@@ -40,29 +40,32 @@ class Ability_Change {
 class Abilities {
 
     private:
-        Ability_Array base_scores {};
-        Ability_Array total_scores {};
+        Ability_Array base {};
+        Ability_Array total {};
         Ability_Array modifiers {};
         std::vector<Ability_Change> history {};
-        
+
     public:
         Abilities();
-        Abilities(std::array<Ability_Array, std::size_t(3)> array);
+        Abilities(int[6]);
+        Abilities(std::array<Ability_Array, std::size_t(3)>);
 
-        int get_base_score(Ability ability);
+        int get_base_score(Ability);
         Ability_Array get_all_base_scores();
-        void set_base_score(Ability ability, int score);
+        void set_base_score(Ability, int);
 
-        int get_total_score(Ability ability);
+        int get_total_score(Ability);
         Ability_Array get_all_total_scores();
-        void set_total_score(Ability ability, int score);
+        void set_total_score(Ability, int);
 
-        int get_modifier(Ability ability);
+        int get_modifier(Ability);
         Ability_Array get_all_modifiers();
-        void set_modifier(Ability ability, int modifier);
+        void set_modifier(Ability, int);
         void update_all_modifiers();
 
-        void update_abilities(Ability_Change change);
+        //TODO figure out history
+
+        void update_abilities(Ability_Change);
 
         void print_abilities();
 };

@@ -26,14 +26,17 @@ void Ability_Array::set_score(Ability ability, int score)
     array[ability] = score;
 }
 
-void Ability_Array::print_ability_array()
+void Ability_Array::print_ability_array(bool sign = false)
 {
     std::cout << '\t' << "STR" << '\t' << "DEX" << '\t' << "CON" << '\t'
                       << "INT" << '\t' << "WIS" << '\t' << "CHA" << '\n';
     std::cout << '\t';
     for (std::size_t i = 0; i < size; i++) {
-        std::cout << array[i] << '\t';
-
+        if (sign) {
+            std::cout << (array[i] > 0 ? "+" : "") << array[i] << '\t';
+        } else {
+            std::cout << array[i] << '\t';
+        }
     }
     std::cout << '\n';
 }
@@ -67,46 +70,53 @@ std::string Ability_Change::get_source()
 
 Abilities::Abilities()
 {
-    base_scores = Ability_Array();
-    total_scores = Ability_Array();
+    base = Ability_Array();
+    total = Ability_Array();
     modifiers = Ability_Array();
+}
+
+Abilities::Abilities(int array[6])
+{
+    base = Ability_Array(array);
+    total = Ability_Array(array);
+    update_all_modifiers();
 }
 
 Abilities::Abilities(std::array<Ability_Array, std::size_t(3)> array)
 {
-    base_scores = array[0];
-    total_scores = array[1];
+    base = array[0];
+    total = array[1];
     modifiers = array[2];
 }
 
 int Abilities::get_base_score(Ability ability)
 {
-    return base_scores.get_score(ability);
+    return base.get_score(ability);
 }
 
 Ability_Array Abilities::get_all_base_scores()
 {
-    return base_scores;
+    return base;
 }
 
 void Abilities::set_base_score(Ability ability, int score)
 {
-    base_scores.set_score(ability, score);
+    base.set_score(ability, score);
 }
 
 int Abilities::get_total_score(Ability ability)
 {
-    return total_scores.get_score(ability);
+    return total.get_score(ability);
 }
 
 Ability_Array Abilities::get_all_total_scores()
 {
-    return total_scores;
+    return total;
 }
 
 void Abilities::set_total_score(Ability ability, int score)
 {
-    total_scores.set_score(ability, score);
+    total.set_score(ability, score);
 }
 
 int Abilities::get_modifier(Ability ability)
@@ -163,21 +173,21 @@ void Abilities::update_all_modifiers()
     }
 }
 
+// TODO figure out history
+
 void Abilities::update_abilities(Ability_Change change)
 {
     history.push_back(change);
-    Ability ability = change.get_ability();
-    int score = change.get_change();
-    set_total_score(ability, (get_total_score(ability) + score));
+    set_total_score(change.get_ability(), (get_total_score(change.get_ability()) + change.get_change()));
     update_all_modifiers();
 }
 
 void Abilities::print_abilities()
 {
     std::cout << "Base ability scores:" << '\n';
-    base_scores.print_ability_array();
+    base.print_ability_array();
     std::cout << "Total ability scores:" << '\n';
-    total_scores.print_ability_array();
+    total.print_ability_array();
     std::cout << "Ability modifiers:" << '\n';
-    modifiers.print_ability_array();
+    modifiers.print_ability_array(true);
 }
