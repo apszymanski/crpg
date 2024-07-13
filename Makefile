@@ -19,4 +19,4 @@ testAbilities: Abilities.o
 	$(CXX) -o $(TEST)Abilities/$@ $(BUILD)Abilities/Abilities.o $(SOURCE)Abilities/test.cpp
 
 clean :
-	rm -f build/Dice/Dice.o test/Dice/testDice
+	rm -f $(BUILD)/Dice/Dice.o $(TEST)/Dice/testDice $(BUILD)/Abilities/Abilities.o $(TEST)/Abilities/testAbilities
