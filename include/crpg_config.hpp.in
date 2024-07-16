@@ -1,0 +1,2 @@
+#define crpg_VERSION_MAJOR @crpg_VERSION_MAJOR@
+#define crpg_VERSION_MINOR @crpg_VERSION_MINOR@
