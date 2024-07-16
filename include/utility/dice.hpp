@@ -3,7 +3,7 @@
 
 #include <random>
 
-class dice {
+class Dice {
     private:
         std::random_device rng{};
     public:

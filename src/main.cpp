@@ -4,14 +4,14 @@
 #include "config.hpp"
 #include "dice.hpp"
 
-void get_random_numbers(dice *ptr, int n = 10)
+void get_random_numbers(Dice *ptr, int n = 10)
 {
     for (int i {}; i < n; ++i){
         std::cout << ptr->roll(n, 20) << "\n";
     }
 }
 
-void check_distribution(dice *ptr, int n = 10000)
+void check_distribution(Dice *ptr, int n = 10000)
 {   
     std::array<int, 20> counter{};
     for (int i {}; i < n; ++i) {
@@ -26,8 +26,8 @@ void check_distribution(dice *ptr, int n = 10000)
 
 int main()
 {
-    dice die = dice();
-    dice *dice_ptr = &die;
+    Dice die = Dice();
+    Dice *dice_ptr = &die;
     get_random_numbers(dice_ptr);
     check_distribution(dice_ptr);
 }

@@ -1,6 +1,6 @@
 #include "dice.hpp"
 
-int dice::roll(int n = 1, int d = 20)
+int Dice::roll(int n = 1, int d = 20)
 {
     int roll{};
 
