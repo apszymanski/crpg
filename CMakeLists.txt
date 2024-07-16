@@ -35,3 +35,7 @@ target_link_libraries(crpg dice)
 
 # Testing 
 enable_testing()
+
+add_subdirectory(test/)
+
+add_test(NAME test_dice COMMAND test_dice )
